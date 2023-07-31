@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.msa.varda.order.IOrderRepository">
+
+
+  
+
+ 	<!-- OdNum(주문번호) 최대값 불러오기 -->
+	 <select id="selectMaxOdNum" resultType="int">
+	  <![CDATA[
+	 		SELECT IFNULL(MAX(OD_NUM),0) FROM ORDERMASTER
+	 ]]>
+	 </select>
+	 
+	 <!-- OdOrder(상품번호) 최대값 불러오기 -->
+	 <select id="selectMaxOdOrder" resultType="int">
+	  <![CDATA[
+	 		SELECT IFNULL(MAX(OD_ORDER),0) FROM ORDERDETAIL
+	 ]]>
+	 </select>
+	 
+	 
+	 
+	 <!-- 주문이 실행되는 순간 주문번호를 생성하여 order master에 먼저 넣어주기 -->
+	 <insert id="setFirstOdmt" parameterType="com.msa.varda.order.OrderMasterVO">
+	 <![CDATA[
+	 		INSERT INTO
+	 			OrderMaster(OD_NUM)
+	 		VALUES
+	 			(#{odNum})
+	 ]]>
+	 </insert>
+	 
+	 
+	 
+	<select id="getPdId" parameterType="String" resultType="String">
+	 <![CDATA[
+	 	SELECT PD_ID
+	 	FROM CART
+	 	WHERE C_ID = #{cId}
+	 ]]>
+	</select>
+	
+	 <!-- OdPrice(상품구매금액) 불러오기 -->
+	<select id="getCheckedPdPrice" parameterType="String" resultType="int">
+	 <![CDATA[
+	 		SELECT PD_PRICE
+	 		FROM PRODUCT
+	 		WHERE PD_ID = #{pdId}
+	 ]]>
+	 </select>
+	 
+
+
+
+	 <insert id="setOddt" parameterType="com.msa.varda.order.OrderDetailVO">
+	 <![CDATA[
+	 	INSERT INTO ORDERDETAIL (od_Order,od_Num,pd_Id,od_Price)
+	 	VALUES(#{odOrder}, #{odNum}, #{pdId}, #{odPrice})
+	 ]]>
+	 </insert>
+
+
+	  <update id="setOdmt" parameterType="com.msa.varda.order.OrderMasterVO">
+	 <![CDATA[
+			update ORDERMASTER 
+			set C_ID = #{cId},
+				OD_SUM = #{odSum},
+				OD_ADD = #{odAdd},
+				OD_PHONE = #{odPhone}
+			where OD_NUM = #{odNum}
+
+	 ]]>
+	 </update>
+	 
+	<resultMap id="deOrderResultMap" type="hashmap">
+    <id property="odOrder" column="od_Order"/>
+    <result property="cId" column="c_id"/>
+    <result property="oOdNum" column="ood_Num"/>
+    <result property="mOdNum" column="mod_Num"/>
+    <result property="oPdId" column="opd_Id"/>
+    <result property="pPdId" column="ppd_Id"/>
+     <result property="odPrice" column="od_Price"/>
+    <result property="pdName" column="pd_Name"/>
+    <result property="pdImg" column="pd_Img"/>
+    <result property="pdSubImg" column="pd_SubImg"/>
+    <result property="pdPrice" column="pd_Price"/>
+    <result property="pdPrice" column="pd_Price"/>
+    <result property="pdTag" column="pd_Tag"/>
+	</resultMap>
+	 
+	<select id = "getOrderList" parameterType="String" resultMap="deOrderResultMap">
+	 <![CDATA[
+		select od_Order,
+		c_Id,
+        o.od_Num ood_NUM,
+        M.OD_NUM MOD_NUM,
+        o.pd_Id opd_Id,
+        p.pd_Id ppd_Id,
+        od_Price,
+        pd_Name,
+        pd_Img,
+        pd_SubImg,
+        pd_Price,
+        pd_Tag
+		from orderdetail o, product p, ordermaster m
+		where (m.c_id = #{cId}) 
+         and (p.pd_id = o.pd_id)
+         and (o.od_num = m.od_num)
+		]]>
+	 </select>
+	 
+	 
+ </mapper>

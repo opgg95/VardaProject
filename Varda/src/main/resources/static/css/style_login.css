@@ -1,0 +1,350 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@700&dissplay=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+#mainContainer {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #FFF;
+}
+
+#logo {
+    float: left;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    padding-left: 20px;
+}
+
+/* #logo h1 {
+    font-family: 'Merienda', cursive;
+    font-weight: 700;
+    font-style: 40px;
+    color: #fff;
+    text-shadow: 0 -1px 0 #222;
+} */
+
+nav {
+    float: right;
+    width: 900px;
+    height: 100px;
+    padding-top: 40px;
+}
+.topMenuNav {
+    width: 100%;
+}
+.menu { float: right; list-style: none; }
+.menu li { float: left; }
+.menu a { line-height: 75px; padding: 0 15px; display: block;}
+.cart {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+.mypage {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+.mypage {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+.logout {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+
+#topMenu {
+    height: 60px;
+    width: 100%;
+}
+
+#topMenu > li {
+    float: left;
+    position: relative;
+    padding: 0 40px;
+}
+
+#topMenu > li > a {
+    display: block;
+    color: #000;
+    font-weight: 600;
+    padding: 2wd;
+}
+
+#topMenu > li > a > span {
+    font-size: 0.5em;
+}
+
+#topMenu > li > a:hover {
+    color: #000;
+}
+
+#topMenu > li > ul {
+    display: none;
+    position: absolute;
+    width: 160px;
+    background-color: #FFFFFF88;
+    left: 20px;
+    margin: 0;
+}
+
+#topMenu > li > ul > li {
+    padding: 10px 10px 10px 30px;
+}
+
+#topMenu > li > ul > li > a {
+    font-size: 14px;
+    padding: 10px;
+    color: #7c826b;
+}
+
+#topMenu > li:hover > ul {
+    display: block;
+    z-index: 10;
+}
+
+#topMenu > li > ul > li > a:hover {
+    color: #ebd1ae;
+}
+
+#slideShow {
+    clear: both;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+#slides {
+    position: absolute;
+}
+
+#slides > img {
+    width: 100%;
+    float: left;
+}
+
+#contents {
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+#tabMenu {
+    float: left;
+    width: 600px;
+    height: 100%;
+    margin-top: 10px;
+}
+
+#tabMenu input[type="radio"] {
+    display: none;
+}
+
+#tabMenu label {
+    display: inline-block;
+    margin: 0 0;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #7c826b;
+    border: 1px solid transparent;
+}
+
+#tabMenu label:hover {
+    color: #c2cbb2;
+    cursor: pointer;
+}
+
+#tabMenu input:checked + label {
+    color: #7c826b;
+    border: 1px solid #ddd;
+}
+
+.tabContent {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+
+.tabContent h2 {
+    display: none;
+}
+
+
+#notice ul {
+    list-style: disc;
+    margin-left: 30px;
+}
+
+#notice ul li {
+    font-size: 16px;
+    line-height: 2.5;
+}
+
+#gallery ul li {
+    display: inline;
+}
+
+#gallery ul li img {
+    width: 150px;
+    height: 100px;
+}
+
+#tab1:checked ~ #notice,
+#tab2:checked ~ #gallery {
+    display: block;
+}
+
+#links {
+    float: right;
+    width: 600px;
+    height: 100%;
+    margin-top: 15px;
+}
+
+#links ul {
+    padding: 0;
+    overflow: hidden;
+}
+
+#links ul li {
+    float: left;
+    width: 33%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#links ul li a span {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 1px solid #ddd;
+    line-height: 150;
+}
+
+
+#quick-icon1 {
+    background-image: url('img/icon-1.jpg');
+}
+#quick-icon2 {
+    background-image: url('img/icon-2.jpg');
+}
+#quick-icon3 {
+    background-image: url('img/icon-3.jpg');
+}
+
+#links ul li a p {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #666;
+}
+
+footer {
+    width: 100%;
+    height: 100px;
+    border-top: 2px solid #222;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    border: none;
+    padding: 20px;
+    background-color: transparent;
+    color: #000;
+    font-weight: 800;
+    font-size: 24px;
+    opacity: 0.5;
+}
+
+#prev {
+    left: 0;
+}
+
+#next {
+    right: 0;
+}
+
+button:hover {
+    /* background-color: #DDD;
+    color: #fff;
+    opacity: 0.6; */
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 0;
+}
+
+#bottomMenu {
+    width: 100%;
+    height: 20px;
+    position: relative;
+}
+
+#bottomMenu ul {
+    margin-top: 15px;
+}
+
+#bottomMenu ul li {
+    float: left;
+    padding: 5px 20px;
+    border-right: 1px solid #ddd;
+}
+
+#bottomMenu ul li:last-child {
+    border-right: none;
+}
+
+
+#bottomMenu ul li a, #bottomMenu ul li a:visited {
+    font-size: 15px;
+    color: #666;
+}
+
+#sns {
+    position: absolute;
+    right: 0;
+}
+
+#sns ul li {
+    border: none;
+    padding: 5px;
+}
+
+p {
+    font-style: 14px;
+    color: #aaa;
+}
+
+#company {
+    clear: left;
+    margin-top: 25px;
+    margin-left: 20px;
+}

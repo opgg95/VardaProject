@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="com.msa.varda.product.IProductRepository">
+  
+   	<!-- categoryNum에 해당하는 상품리스트 값 조회하기 -->
+	 <select id="getProductList" parameterType="hashmap" resultType="com.msa.varda.product.ProductVO">
+	  <![CDATA[
+	 				
+	 		SELECT PD_ID as pdId, 
+	 		PD_NAME	as pdName, 
+	 		PD_IMG	as pdImg, 
+	 		PD_SUBIMG	as pdSumImg, 
+	 		PD_PRICE as pdPrice, 
+	 		PD_TAG as pdTag, 
+	 		PD_DESCRIP as pdDecrip, 
+	 		GENDER	as gender, 
+	 		SKINTYPE as skinType, 
+	 		PDTYPE as pdType
+	 		
+	 		FROM PRODUCT
+	 		WHERE gender=${gender}
+	 			and	skinType=${skinType}
+	 			and pdType=${pdType}
+	 ]]>
+	 </select>
+	 
+	 <!-- pdId 해당하는 상품리스트 값 조회하기 -->
+	 <select id="getProductInfo" parameterType="String" resultType="com.msa.varda.product.ProductVO">
+	  <![CDATA[
+	 		SELECT PD_ID as pdId, 
+	 		PD_NAME	as pdName, 
+	 		PD_IMG	as pdImg, 
+	 		PD_SUBIMG	as pdSubImg, 
+	 		PD_PRICE as pdPrice, 
+	 		PD_TAG as pdTag, 
+	 		PD_DESCRIP as pdDecrip, 
+	 		GENDER	as gender, 
+	 		SKINTYPE as skinType, 
+	 		PDTYPE as pdType
+	 		FROM PRODUCT
+	 		WHERE PD_ID='${pdId}'		
+	 ]]>
+	 </select>
+	
+	 	 
+	 <!-- 새로운 상품 등록하기 -->
+	 <insert id="insertProduct" parameterType="com.msa.varda.product.ProductVO">
+	<![CDATA[
+		INSERT INTO 
+			PRODUCT ( PD_ID, 
+	 				PD_NAME, 
+	 				PD_IMG, 
+			 		PD_SUBIMG, 
+			 		PD_PRICE, 
+			 		PD_TAG, 
+			 		PD_DESCRIP, 
+			 		GENDER, 
+			 		SKINTYPE, 
+			 		PDTYPE) 
+		VALUES 
+			(#{pdId}, #{pdName}, #{pdImg}, #{pdSubImg}, #{pdPrice}, #{pdTag}, #{pdDescrip}, #{gender}, #{skinType}, #{pdType})
+	]]>
+	 </insert>
+	 
+	 <!-- 상품 아이디를 만들기 위한 상품등록순번 최곳값 구하기 -->
+	 	 <select id="makeProductId" resultType="int">
+	  <![CDATA[
+	 		SELECT COUNT(*) 
+	 		FROM PRODUCT
+	 ]]>
+	 </select>
+	 
+
+ 
+
+	 
+ </mapper>

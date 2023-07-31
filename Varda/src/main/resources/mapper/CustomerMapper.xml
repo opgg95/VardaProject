@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.msa.varda.customer.ICustomerRepository">
+
+	<insert id="joinCustomer" parameterType="com.msa.varda.customer.CustomerVO">
+    <![CDATA[
+        INSERT INTO
+            customer(c_Id, c_Name, c_Pwd, c_Phone1, c_Phone2, c_Phone3, c_Email1, c_Email2, postcode, address, detailAdd, extraAdd)
+        VALUES
+            (#{cId}, #{cName}, #{cPwd}, #{cPhone1}, #{cPhone2}, #{cPhone3}, #{cEmail1}, #{cEmail2}, #{postcode}, #{address}, #{detailAdd}, #{extraAdd})
+    ]]>
+	</insert>
+	
+	<update id="updateCustomer" parameterType="com.msa.varda.customer.CustomerVO">
+	<![CDATA[
+		UPDATE 
+			customer
+		SET
+			c_Name=#{cName}, c_Pwd=#{cPwd}, c_Phone1=#{cPhone1}, c_Phone2=#{cPhone2}, c_Phone3=#{cPhone3},
+			c_Email1=#{cEmail1}, c_Email2=#{cEmail2}, postcode=#{postcode}, address=#{address}, detailAdd=#{detailAdd}, extraAdd=#{extraAdd}
+		WHERE
+			c_Id=#{cId}
+	]]>
+	</update>
+	
+	<select id="getcPwd" parameterType="string" resultType="string">
+	<![CDATA[
+		SELECT
+			c_Pwd as cPwd
+		FROM
+			customer
+		WHERE c_Id =#{cId}
+	]]>
+	</select>
+	
+	<select id="login" parameterType="string" resultType="com.msa.varda.customer.CustomerVO">
+	<![CDATA[
+		SELECT
+			c_Id as cId,c_Name as cName,c_Pwd as cPwd,c_Phone1 as cPhone1, 
+			c_Phone2 as cPhone2, c_Phone3 as cPhone3,c_Email1 as cEmail1, c_Email2 as cEmail2,
+			postcode, address, detailAdd, extraAdd
+		FROM
+			customer
+		WHERE 
+			c_Id=#{cId}
+	]]>
+	</select>
+	
+	<select id="selectCustomerVO" parameterType="string" resultType="com.msa.varda.customer.CustomerVO">
+	<![CDATA[
+		SELECT
+			c_Id as cId,c_Name as cName,c_Pwd as cPwd,c_Phone1 as cPhone1, 
+			c_Phone2 as cPhone2, c_Phone3 as cPhone3,c_Email1 as cEmail1, c_Email2 as cEmail2,
+			postcode, address, detailAdd, extraAdd
+		FROM
+			customer
+		WHERE 
+			c_Id=#{cId}
+	]]>
+	</select>
+	
+	<select id = "idCheck" parameterType="String" resultType="int">
+      select count(*) from customer where c_Id=#{id};
+   </select>
+	
+	<select id="getInfo" parameterType="com.msa.varda.customer.CustomerVO"
+						  resultType="com.msa.varda.customer.CustomerVO">
+		select * from customer where c_Id = #{cId} and c_Pwd=#{cPwd}
+		
+	</select>
+	
+	<select id="updateCustomerInfo" parameterType="String" resultType="com.msa.varda.customer.CustomerVO">
+   <![CDATA[
+      SELECT *
+      FROM CUSTOMER
+      WHERE C_ID='#{cId}'
+   ]]>
+   </select>
+   
+   <update id="updateInfo" parameterType="com.msa.varda.customer.CustomerVO">
+   <![CDATA[
+      UPDATE CUSTOMER
+      SET C_NAME=#{cName}, 
+         C_PWD=#{cPwd}, 
+         C_PHONE1=#{cPhone1}, 
+         C_PHONE2=#{cPhone2},
+         C_PHONE3=#{cPhone3},
+         C_EMAIL1=#{cEmail1},
+         C_EMAIL2=#{cEmail2},
+         POSTCODE=#{postcode},
+         ADDRESS=#{address},
+         DETAILADD=#{detailAdd},
+         EXTRAADD=#{extraAdd}
+      WHERE C_ID=#{cId, jdbcType=VARCHAR}
+         
+      
+   ]]>
+   </update>
+   
+	
+	
+</mapper>

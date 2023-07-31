@@ -1,0 +1,91 @@
+
+
+  @import url("/Main/style_login.css");
+  @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css");
+      .jb-wrap {
+            width: 100%;
+            margin : 0px auto;
+            position: relative;
+        }
+        .jb-wrap img {
+            width: 100%;
+            height: 80%;
+            vertical-align: middle;
+        }
+        .jb-text {
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        .jb-text-table {
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+        .jb-text-table-row {
+            display: table-row;ㄴ
+        }
+        .jb-text-table-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .layout{
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.qna{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.qna > li{
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.qna > li:nth-child(n+2){ /* 아이템 구분 점선 */
+  border-top: 1px dashed #aaa;
+}
+.qna input {
+  display: none;
+}
+
+
+.qna label { /* 제목 - 클릭 영역 */
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #000;
+  margin: 20px 0 0;
+  cursor: pointer;
+}
+
+
+
+.qna div { /* 내용 영역 - 기본 감춤 상태 */
+  display: none;
+  color: #666;
+  font-size: 1.0em;
+  overflow: hidden;
+  padding: 10px 0 10px 30px;
+  box-sizing: border-box;
+  transition: max-height 0.4s;
+}
+.qna input:checked + label + div { /* 내용 영역 펼침 */
+  display: block;
+}
+.qna label::before { /* 제목 앞 화살표 */
+  content: "▶";
+  display: block;
+  color: #ccc;
+  margin-right: 8px;
+  float: left;
+}
+.qna input:checked + label::before { /* 내용 펼침 상태 제목 앞 화살표 */
+  content: "▼";
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//KO"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.msa.varda.cart.ICartRepository">
+
+<resultMap id="detailedCartResultMap" type="hashmap">
+    <id property="cartNum" column="cartNum"/>
+    <result property="cId" column="c_id"/>
+    <result property="cPdId" column="cpd_Id"/>
+     <result property="pdImg" column="Pd_Img"/>
+    <result property="pdName" column="pd_Name"/>
+    <result property="pdSumImg" column="pd_SubImg"/>
+    <result property="PdPrice" column="pd_Price"/>
+    <result property="pdTag" column="pd_Tag"/>
+    <result property="pdDescrip" column="pd_Descrip"/>
+    <result property="gender" column="gender"/>
+    <result property="skinType" column="skinType"/>
+    <result property="pdType" column="pdType"/>
+</resultMap>
+
+	<select id="getCartList" parameterType="string" resultMap="detailedCartResultMap">
+	<![CDATA[
+		select cartNum,
+        c_Id,
+        c.pd_Id cpd_ID,
+        Pd_Img,
+        pd_Name,
+        pd_SubImg,
+        pd_Price,
+        pd_Tag,
+        pd_Descrip,
+        gender,
+        skinType,
+        pdType
+		from cart c, product p
+		where (c.c_id = #{cId}) 
+         and (p.pd_id = c.pd_id)
+	]]>
+	</select>
+	
+	<!-- 장바구니에 담기 -->
+    <insert id="addCart" parameterType="com.msa.varda.cart.CartVO">
+    <![CDATA[
+          INSERT INTO CART(CARTNUM, C_ID, PD_ID) 
+          VALUES(#{cartNum}, #{cId}, #{pdId})
+    ]]>
+    </insert>
+    
+    
+    
+    <!-- 장바구니 삭제 -->
+    <delete id="deleteCart" parameterType="hashmap">
+    <![CDATA[
+    	delete from cart
+    	where (c_id=#{cId}) and (cartNum=#{cartNum})
+    ]]>	
+    </delete>
+    
+    <select id="selectMaxCartNum" resultType="int">
+	<![CDATA[
+			SELECT IFNULL(MAX(cartNum),0) FROM CART
+	]]>
+	</select>
+	
+	<select id="getFile" parameterType="string" resultType="com.msa.varda.cart.FileVO">
+	  select  pd_id as fileId, pd_Img as fileData from product where pd_id=#{id}
+	</select>
+	
+	<select id="getSubFile" parameterType="string" resultType="com.msa.varda.cart.FileVO">
+	  select  pd_id as fileId, pd_SubImg as fileData from product where pd_id=#{id}
+	</select>
+    
+</mapper>

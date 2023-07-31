@@ -1,0 +1,10 @@
+    @import url("/Main/style_logout.css");
+    @import url("https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css");
+        header{
+            margin-top: 30px;
+            margin-bottom: 90px;
+        }
+        a:hover{
+            text-decoration: none;
+            color: black;
+        }
